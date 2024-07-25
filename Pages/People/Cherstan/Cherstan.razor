@@ -1,0 +1,45 @@
+@page "/people/cherstan"
+@using Romeilter.Pages.People.Models
+
+<PageTitle>Cherstan</PageTitle>
+
+<h1>Cherstan</h1>
+
+<div class="d-flex flex-row gap-2">
+    <button class="btn btn-link @(State == BasePeopleState.Base ? "active" : "")"
+        onclick="@State = BasePeopleState.Base">Übersicht
+    </button>
+    <button class="btn btn-link @(State == BasePeopleState.Groups ? "active" : "")"
+        onclick="@State = BasePeopleState.Groups">
+        Fraktionen</button>
+    <button class="btn btn-link @(State == BasePeopleState.Politics ? "active" : "")"
+        onclick="@State = BasePeopleState.Politics">
+        Politisch</button>
+    <button class="btn btn-link @(State == BasePeopleState.Stories ? "active" : "")"
+        onclick="@State = BasePeopleState.Stories">
+        Geschichten</button>
+</div>
+
+@if (State == BasePeopleState.Base)
+{
+    <CherstanBase />
+}
+@if (State == BasePeopleState.Groups)
+{
+    <CherstanGroups />
+}
+@if (State == BasePeopleState.Politics)
+{
+    <CherstanPolitics />
+}
+
+@if (State == BasePeopleState.Stories)
+{
+    <CherstanStories />
+}
+
+
+
+@code {
+    public BasePeopleState State { get; set; }
+}

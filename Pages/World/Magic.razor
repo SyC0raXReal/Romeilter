@@ -1,18 +1,57 @@
 @page "/world/magic"
+@using Romeilter.Models
 
-<h1>Die Magie</h1>
+<h6>Die Magie</h6>
 
 <p>
-    Die Magie funktioniert auf Basis der Kenntnis.
-
+    Die Magie funktioniert auf Basis der Kenntnis.<br />
+    <br />
     Ein Beispiel:
-    Ein Schmied der sich Jahre mit der Hitze des Feuers und unterschiedlichen Arten der verarbeitung von Metall beschäftigt hat,
-    kann nun durch weiteres Forschen an den Eigenschaften des Feuers anfangen dieses zu beherrschen.
-    Anfangs kann er vielleicht die Temparatur steuern, oder die Kohlen mit der Kraft der Magie entzünden.
+    Ein Schmied der sich Jahre mit der Hitze des Feuers und unterschiedlichen Arten der verarbeitung von Metall
+    beschäftigt hat,<br />
+    kann nun durch weiteres Forschen an den Eigenschaften des Feuers anfangen dieses zu beherrschen.<br />
+    Anfangs kann er vielleicht die Temparatur steuern, oder die Kohlen mit der Kraft der Magie entzünden.<br />
     Je mehr er über das Feuer lernt, desto mehr kann er dieses kontrollieren
 </p>
 
 <p>
-    Im endeffekt ist jeder dazu in der Lage die Magie zu verwenden, jedoch ähnlich wie ein Schwertmeister muss sich jemand lange mit der Magie und
-    einem Medium beschäftigen
+    Im endeffekt ist jeder dazu in der Lage die Magie zu verwenden, jedoch ähnlich wie ein Schwertmeister muss sich
+    jemand lange mit <br />
+    der Magie und einem Medium beschäftigen
 </p>
+
+<p>
+    Es gibt Personen die werden mit dem Talent geboren und können mit moderatem Aufwandt die Magie ihrer affinen Medium
+    erlernen.<br />
+</p>
+
+<h6>Regeln</h6>
+<p>Man kann sich verschiedene Fähigkeiten eines Mediums aneignen. Hier ein Beispiel mit dem Medium Feuer</p>
+
+<AbilityExampleTable MagicExample="@MagicExample" />
+
+<p>
+    Der Character fängt immer mit einer Kleinen Form an und durch Progression wird er mit der Zeit die größeren Formen erlernen.
+</p>
+
+@code {
+    private List<AbilityExampleModel> MagicExample = [ 
+        new (){
+            AbilityGroup = "Wissen",
+            AbilityName = "Feuer Formen Klein",
+            Effect = "Feuermagie in einem 1m³ Bereich wirken, kann zum angriff genutzt werden: 5W10, Angriffroll auf mehrere Ziele wird um 15 erschwert",
+            Requirement = "Thermodynamik / Feuerwissen 25"
+        }, 
+        new (){
+            AbilityGroup = "Wissen",
+            AbilityName = "Feuer Formen Mittel",
+            Effect = "Feuermagie in einem 3m³ Bereich wirken, kann zum angriff genutzt werden: 8W10, Angriffroll auf mehrere Ziele wird um 30 erschwert",
+            Requirement = "Thermodynamik / Feuerwissen 50"
+        },
+        new (){
+            AbilityGroup = "Wissen",
+            AbilityName = "Feuer Formen Groß",
+            Effect = "Feuermagie in einem 5m³ Bereich wirken, kann zum angriff genutzt werden: 10W10, Angriffroll auf mehrere Ziele wird um 45 erschwert",
+            Requirement = "Thermodynamik / Feuerwissen 75"
+        }];
+}

@@ -1,0 +1,20 @@
+@using Romeilter.Models
+<MudTable Items="@MagicExample" Hover>
+    <HeaderContent>
+        <MudTh>Fähgkeitsgruppe</MudTh>
+        <MudTh>Fähigkeitsname</MudTh>
+        <MudTh>Effekt</MudTh>
+        <MudTh>Vorraussetzung</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.AbilityGroup</MudTd>
+        <MudTd>@context.AbilityName</MudTd>
+        <MudTd>@context.Effect</MudTd>
+        <MudTd>@context.Requirement</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    [Parameter]
+    public List<AbilityExampleModel> MagicExample { get; set; } = new List<AbilityExampleModel>();
+}

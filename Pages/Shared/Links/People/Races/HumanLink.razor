@@ -1,0 +1,15 @@
+<MudLink Href="/world/races/human">
+    @if (Plural == true)
+    {
+        <span>Menschen</span>
+    }
+    else
+    {
+        <span>Mensch</span>
+    }
+</MudLink>
+
+@code {
+    [Parameter]
+    public bool? Plural { get; set; } = false;
+}

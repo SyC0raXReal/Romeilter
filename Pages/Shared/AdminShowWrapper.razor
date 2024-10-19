@@ -1,0 +1,13 @@
+@if (ShowAdminContent)
+{
+    @ChildContent
+}
+
+
+@code {
+    [Parameter]
+    public required RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter]
+    public bool ShowAdminContent { get; set; }
+}

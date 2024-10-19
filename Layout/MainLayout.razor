@@ -52,16 +52,30 @@
         </MudNavMenu>
     </MudDrawer>>
 
+    <div style="position: absolute; top: 30px; right: 30px;">
+        <MudIconButton Variant="Variant.Outlined" Color="@(ShowAdminContent ? Color.Secondary : Color.Success)"
+            Icon="@(ShowAdminContent ? Icons.Material.Filled.RemoveRedEye : @Icons.Material.Outlined.RemoveRedEye)"
+            OnClick="@((e) => ToggleAdmin())" />
+    </div>
+
     <MudMainContent class="py-5 px-10">
-        @Body
+        <CascadingValue Value="ShowAdminContent">
+            @Body
+        </CascadingValue>
     </MudMainContent>
 </MudLayout>
 
 @code {
     private bool _open = false;
+    private bool ShowAdminContent = true;
 
     private void ToggleDrawer()
     {
         _open = !_open;
+    }
+
+    private void ToggleAdmin()
+    {
+        ShowAdminContent = !ShowAdminContent;
     }
 }

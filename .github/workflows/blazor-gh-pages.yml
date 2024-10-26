@@ -1,4 +1,4 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
+                                                            # Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
@@ -28,7 +28,6 @@ jobs:
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          BASE_BRANCH: main # The branch the action should deploy from.
           BRANCH: main
           FOLDER: build/wwwroot # The folder the action should deploy.
           SINGLE_COMMIT: true

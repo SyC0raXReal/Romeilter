@@ -28,6 +28,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           BASE-BRANCH: development
-          BRANCH: main
+          BRANCH: deployment
           FOLDER: build/wwwroot # The folder the action should deploy.
           SINGLE_COMMIT: true

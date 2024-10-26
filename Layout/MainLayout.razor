@@ -6,7 +6,22 @@
 <MudSnackbarProvider />
 
 <MudLayout style="height: 100%;">
-    <MudDrawer @bind-Open="@_open" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+            OnClick="@ToggleDrawer" />
+        <MudSpacer />
+        <div class="d-flex flex-row gap-3">
+            @if (IsAdmin)
+            {
+                <MudIconButton Variant="Variant.Outlined" Color="@(ShowAdminContent ? Color.Secondary : Color.Success)"
+                    Icon="@(ShowAdminContent ? Icons.Material.Filled.RemoveRedEye : @Icons.Material.Outlined.RemoveRedEye)"
+                    OnClick="@((e) => ToggleAdmin())" />
+            }
+            <MudIconButton Variant="Variant.Outlined" Color="Color.Secondary" Icon="@Icons.Material.Filled.Lock"
+                OnClick="@((e) => ToggleLogin())" />
+        </div>
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_open" Variant="@DrawerVariant.Responsive" Overlay="false">
         <MudNavMenu>
             @if (!_open)
             {
@@ -51,19 +66,6 @@
             </MudNavGroup>
         </MudNavMenu>
     </MudDrawer>>
-
-    @if (IsAdmin)
-    {
-        <div style="position: absolute; top: 30px; right: 30px;">
-            <MudIconButton Variant="Variant.Outlined" Color="@(ShowAdminContent ? Color.Secondary : Color.Success)"
-                Icon="@(ShowAdminContent ? Icons.Material.Filled.RemoveRedEye : @Icons.Material.Outlined.RemoveRedEye)"
-                OnClick="@((e) => ToggleAdmin())" />
-        </div>
-    }
-    <div style="position: absolute; top: 30px; right: 75px;">
-        <MudIconButton Variant="Variant.Outlined" Color="Color.Secondary" Icon="@Icons.Material.Filled.Lock"
-            OnClick="@((e) => ToggleLogin())" />
-    </div>
 
     <MudPopover Open="@Login" Fixed="true" Class="px-4 pt-4" AnchorOrigin="Origin.CenterCenter">
         <div class="d-flex flex-column">

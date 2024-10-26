@@ -22,30 +22,30 @@
             <MudDivider Class="my-2" />
             <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/">Home</MudNavLink>
             <MudNavGroup Icon="@Icons.Material.Filled.People" Title="Völker" Expanded="true">
-                <MudNavLink Icon="@Icons.Material.Filled.LocalFireDepartment" Href="/people/cherstan">Cherstan
+                <MudNavLink Icon="@Icons.Material.Filled.LocalFireDepartment" Href="people/cherstan">Cherstan
                 </MudNavLink>
-                <MudNavLink Icon="@Icons.Material.Filled.People" Href="/people/federation">Federation von Khergia
+                <MudNavLink Icon="@Icons.Material.Filled.People" Href="people/federation">Federation von Khergia
                 </MudNavLink>
-                <MudNavLink Icon="@Icons.Material.Filled.Nature" Href="/people/iqua">Iqua</MudNavLink>
-                <MudNavLink Icon="@Icons.Material.Filled.Build" Href="/people/cerg">Protektorat Cerg</MudNavLink>
-                <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKing" Href="/people/ahian">Sultanat Ahian
+                <MudNavLink Icon="@Icons.Material.Filled.Nature" Href="people/iqua">Iqua</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.Build" Href="people/cerg">Protektorat Cerg</MudNavLink>
+                <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKing" Href="people/ahian">Sultanat Ahian
                 </MudNavLink>
             </MudNavGroup>
             <MudNavGroup Icon="@Icons.Material.Filled.Brightness1" Title="Welt" Expanded="true">
-                <MudNavLink Icon="@Icons.Material.Filled.MenuBook" Href="/world/lore">Lore</MudNavLink>
-                <MudNavLink Icon="@Icons.Material.Filled.Star" Href="/world/magic">Magie</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.MenuBook" Href="world/lore">Lore</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.Star" Href="world/magic">Magie</MudNavLink>
                 <MudNavGroup Icon="@Icons.Custom.Uncategorized.ColorPalette" Title="Rassen" Expanded="true">
-                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKing" Href="/world/races/human">Menschen
+                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKing" Href="world/races/human">Menschen
                     </MudNavLink>
-                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessQueen" Href="/world/races/dwarf">Zwerge
+                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessQueen" Href="world/races/dwarf">Zwerge
                     </MudNavLink>
-                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKnight" Href="/world/races/elves">Elfen
+                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKnight" Href="world/races/elves">Elfen
                     </MudNavLink>
-                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessPawn" Href="/world/races/gnomes">Gnome
+                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessPawn" Href="world/races/gnomes">Gnome
                     </MudNavLink>
-                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessBishop" Href="/world/races/harenae">Harenae
+                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessBishop" Href="world/races/harenae">Harenae
                     </MudNavLink>
-                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessRook" Href="/world/races/giant">Riesen
+                    <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessRook" Href="world/races/giant">Riesen
                     </MudNavLink>
                 </MudNavGroup>
             </MudNavGroup>
@@ -67,7 +67,7 @@
 
 @code {
     private bool _open = false;
-    private bool ShowAdminContent = true;
+    private bool ShowAdminContent = false;
 
     private void ToggleDrawer()
     {

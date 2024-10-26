@@ -52,11 +52,28 @@
         </MudNavMenu>
     </MudDrawer>>
 
-    <div style="position: absolute; top: 30px; right: 30px;">
-        <MudIconButton Variant="Variant.Outlined" Color="@(ShowAdminContent ? Color.Secondary : Color.Success)"
-            Icon="@(ShowAdminContent ? Icons.Material.Filled.RemoveRedEye : @Icons.Material.Outlined.RemoveRedEye)"
-            OnClick="@((e) => ToggleAdmin())" />
+    @if (IsAdmin)
+    {
+        <div style="position: absolute; top: 30px; right: 30px;">
+            <MudIconButton Variant="Variant.Outlined" Color="@(ShowAdminContent ? Color.Secondary : Color.Success)"
+                Icon="@(ShowAdminContent ? Icons.Material.Filled.RemoveRedEye : @Icons.Material.Outlined.RemoveRedEye)"
+                OnClick="@((e) => ToggleAdmin())" />
+        </div>
+    }
+    <div style="position: absolute; top: 30px; right: 60px;">
+        <MudIconButton Variant="Variant.Outlined" Color="Color.Secondary" Icon="@Icons.Material.Filled.Lock"
+            OnClick="@((e) => ToggleLogin())" />
     </div>
+
+    <MudPopover Open="@Login" Fixed="true" Class="px-4 pt-4" AnchorOrigin="Origin.CenterCenter">
+        <div class="d-flex flex-column">
+            <MudTextField @bind-Value="Password" Label="Passwort eingeben" Variant="Variant.Text"></MudTextField>
+            <div class="d-flex flex-row gap-3">
+                <MudButton OnClick="@EnterLogin" Class="ml-auto mr-n3 mb-1" Color="Color.Error">Einloggen</MudButton>
+                <MudButton OnClick="@ToggleLogin" Class="ml-auto mr-n3 mb-1" Color="Color.Error">Schließen</MudButton>
+            </div>
+        </div>
+    </MudPopover>
 
     <MudMainContent class="py-5 px-10">
         <CascadingValue Value="ShowAdminContent">
@@ -68,6 +85,9 @@
 @code {
     private bool _open = false;
     private bool ShowAdminContent = false;
+    private bool IsAdmin = false;
+    private bool Login = false;
+    private string Password { get; set; } = "";
 
     private void ToggleDrawer()
     {
@@ -77,5 +97,25 @@
     private void ToggleAdmin()
     {
         ShowAdminContent = !ShowAdminContent;
+    }
+
+    private void ToggleLogin()
+    {
+        Login = !Login;
+        Password = "";
+    }
+
+    private void EnterLogin()
+    {
+        if (Password == "pizza")
+        {
+            IsAdmin = true;
+        }
+        else
+        {
+            IsAdmin = false;
+        }
+
+        ToggleLogin();
     }
 }

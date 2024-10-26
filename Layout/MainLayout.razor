@@ -21,19 +21,18 @@
                 OnClick="@((e) => ToggleLogin())" />
         </div>
     </MudAppBar>
-    <MudDrawer @bind-Open="@_open" Variant="@DrawerVariant.Responsive" Overlay="false">
+    <MudDrawer @bind-Open="@_open" Variant="@DrawerVariant.Temporary" Overlay="false" OverlayAutoClose="true">
         <MudNavMenu>
-            @if (!_open)
-            {
-                <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowRight" Color="Color.Inherit"
-                    OnClick="@((e) => ToggleDrawer())" />
-            }
-            else
-            {
-                <MudText Typo="Typo.h6" Class="px-4">Romeilter</MudText>
-                <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">PnP Wiki</MudText>
-            }
-
+            <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column">
+                    <MudText Typo="Typo.h6" Class="px-4">Romeilter</MudText>
+                    <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">PnP Wiki</MudText>
+                </div>
+                <div>
+                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowRight" Color="Color.Inherit"
+                        OnClick="@((e) => ToggleDrawer())" />
+                </div>
+            </div>
             <MudDivider Class="my-2" />
             <MudNavLink Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
             <MudNavGroup Icon="@Icons.Material.Filled.People" Title="Völker" Expanded="true">
@@ -77,7 +76,7 @@
         </div>
     </MudPopover>
 
-    <MudMainContent class="py-5 px-10">
+    <MudMainContent>
         <CascadingValue Value="ShowAdminContent">
             @Body
         </CascadingValue>

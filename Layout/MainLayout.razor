@@ -29,7 +29,7 @@
                     <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">PnP Wiki</MudText>
                 </div>
                 <div>
-                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowRight" Color="Color.Inherit"
+                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowLeft" Color="Color.Inherit"
                         OnClick="@((e) => ToggleDrawer())" />
                 </div>
             </div>
@@ -78,7 +78,9 @@
 
     <MudMainContent>
         <CascadingValue Value="ShowAdminContent">
-            @Body
+            <div class="d-flex w-100 h-100 px-3">
+                @Body
+            </div>
         </CascadingValue>
     </MudMainContent>
 </MudLayout>

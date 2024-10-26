@@ -3,7 +3,7 @@ name: Deploy to github pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["development"]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          BASE-BRANCH: development
+          BASE-BRANCH: main
           BRANCH: deployment
           FOLDER: build/wwwroot # The folder the action should deploy.
           SINGLE_COMMIT: true

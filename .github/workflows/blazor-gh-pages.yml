@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write 
 
@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: main
+          BASE-BRANCH: main
+          BRANCH: deployment
           FOLDER: build/wwwroot # The folder the action should deploy.
           SINGLE_COMMIT: true

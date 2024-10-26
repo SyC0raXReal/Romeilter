@@ -26,7 +26,7 @@ jobs:
       - name: Publish with dotnet
         run: dotnet publish --configuration Release --output build
       - name: Deploy to Github Pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           BASE-BRANCH: main
           BRANCH: deployment

@@ -68,7 +68,8 @@
 
     <MudPopover Open="@Login" Fixed="true" Class="px-4 pt-4" AnchorOrigin="Origin.CenterCenter">
         <div class="d-flex flex-column">
-            <MudTextField @bind-Value="Password" Label="Passwort eingeben" Variant="Variant.Text"></MudTextField>
+            <MudTextField @bind-Value="Password" InputType="InputType.Password" Label="Passwort eingeben"
+                Variant="Variant.Text"></MudTextField>
             <div class="d-flex flex-row gap-3">
                 <MudButton OnClick="@EnterLogin" Class="ml-auto mr-n3 mb-1" Color="Color.Error">Einloggen</MudButton>
                 <MudButton OnClick="@ToggleLogin" Class="ml-auto mr-n3 mb-1" Color="Color.Error">Schließen</MudButton>

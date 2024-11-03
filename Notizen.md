@@ -1,3 +1,0 @@
-- Großer konflikt zwischen Khergia und Ahian um den Südlichen Landzipfel
-- Protektorat Cerg als krasses Gebiet, Rohstoffreich strebt weiter souveränität von Khergia an
-- Iqua Eher wildes Nördliches Volk ein land von starken Kriegern, umbarmherzigen Wintern (eher neutral)

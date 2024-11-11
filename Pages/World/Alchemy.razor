@@ -1,0 +1,105 @@
+@page "/world/alchemy"
+@using Romeilter.Models
+
+<PageTitle>Alchemie</PageTitle>
+
+<h6>Alchemie</h6>
+
+<p>
+    Seit dem Erwachen der Magie scheinen verschiedene Pflanzen nun mit der Zeit Magische <br />
+    Effekte zu entwickeln. Diese kann nun durch Destillation und andere Vorgänge in <br />
+    Tränke extrahiert werden.
+</p>
+
+<p>
+    Die Alchemie ist ein sehr junges Feld der Wissenschaft und somit sind Alchemisten noch <br />
+    nicht weit verbreitet. Aktuell versammelt sich die offizielle Forschung in
+    <CherstanLink /> <br />
+    Da hier ohne Auflagen einer Regierung geforscht werden kann.
+</p>
+
+<p>
+    Die meisten Alchemisten halten jedoch akuell ihre Ergebnisse zurück mit der Hoffnung viel <br />
+    Profit machen zu können. Wodurch die meisten magischen Plfanzen und deren Effekte noch <br />
+    unbekannt sind.
+</p>
+
+<div class="row">
+    <div class="@(ShowAdminContent ? "col-lg-6" : "") col-12">
+        <MudDataGrid T="AlchemyPlantModel" MultiSelection="true" Items="@Plants" SortMode="SortMode.Multiple"
+            Filterable="true" QuickFilter="@_quickPlant" Hideable="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6"></MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchPlant" Placeholder="Suchen" Adornment="Adornment.Start"
+                    Immediate="true" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+                </MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <SelectColumn T="AlchemyPlantModel" />
+                <PropertyColumn Property="x => x.Name" Title="Name" Sortable="false" Filterable="false" />
+                <PropertyColumn Property="x => x.Sign" />
+                <PropertyColumn Property="x => x.Name" SortBy="@_sortBy" CellStyleFunc="" />
+                <PropertyColumn Property="x => x.Position" />
+                <PropertyColumn Property="x => x.Molar" Title="Molar mass" />
+                <PropertyColumn Property="x => x.Group" Title="Category" />
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="AlchemyPlantModel" />
+            </PagerContent>
+        </MudDataGrid>
+    </div>
+    <AdminShowWrapper>
+        <div class="col-lg-6 col-12">
+
+        </div>
+    </AdminShowWrapper>
+
+</div>
+
+@code {
+    [CascadingParameter]
+    public bool ShowAdminContent { get; set; }
+
+    private IEnumerable<AlchemyPlantModel> Plants = new List<AlchemyPlantModel>();
+    private string _searchPlant = string.Empty;
+
+    private Func<AlchemyPlantModel, bool> _quickPlant => x =>
+    {
+        if (string.IsNullOrWhiteSpace(_searchString))
+            return true;
+
+        if (x.Sign.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if ($"{x.Number} {x.Position} {x.Molar}".Contains(_searchString))
+            return true;
+
+        return false;
+    };
+
+    private Func<AlchemyPlantModel, string> _cellStyleFunc => x =>
+    {
+        string style = "";
+
+        if (x.Number == 1)
+            style += "background-color:#8CED8C";
+
+        else if (x.Number == 2)
+            style += "background-color:#E5BDE5";
+
+        else if (x.Number == 3)
+            style += "background-color:#EACE5D";
+
+        else if (x.Number == 4)
+            style += "background-color:#F1F165";
+
+        if (x.Molar > 5)
+            style += ";font-weight:bold";
+
+        return style;
+    };
+}

@@ -1,6 +1,6 @@
 namespace Romeilter.Models;
 
-public class AlchemyPlantModel
+public class AlchemyPlantModel : IRarity
 {
     public required string Name { get; set; }
     public Rarity Rarity { get; set; }

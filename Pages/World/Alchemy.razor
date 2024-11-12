@@ -1,5 +1,6 @@
 @page "/world/alchemy"
 @using Romeilter.Models
+@using Romeilter.StaticServices;
 
 <PageTitle>Alchemie</PageTitle>
 
@@ -24,82 +25,98 @@
     unbekannt sind.
 </p>
 
-<div class="row">
-    <div class="@(ShowAdminContent ? "col-lg-6" : "") col-12">
-        <MudDataGrid T="AlchemyPlantModel" MultiSelection="true" Items="@Plants" SortMode="SortMode.Multiple"
-            Filterable="true" QuickFilter="@_quickPlant" Hideable="true">
-            <ToolBarContent>
-                <MudText Typo="Typo.h6"></MudText>
-                <MudSpacer />
-                <MudTextField @bind-Value="_searchPlant" Placeholder="Suchen" Adornment="Adornment.Start"
-                    Immediate="true" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
-                </MudTextField>
-            </ToolBarContent>
-            <Columns>
-                <SelectColumn T="AlchemyPlantModel" />
-                <PropertyColumn Property="x => x.Name" Title="Name" Sortable="false" Filterable="false" />
-                <PropertyColumn Property="x => x.Sign" />
-                <PropertyColumn Property="x => x.Name" SortBy="@_sortBy" CellStyleFunc="" />
-                <PropertyColumn Property="x => x.Position" />
-                <PropertyColumn Property="x => x.Molar" Title="Molar mass" />
-                <PropertyColumn Property="x => x.Group" Title="Category" />
-            </Columns>
-            <PagerContent>
-                <MudDataGridPager T="AlchemyPlantModel" />
-            </PagerContent>
-        </MudDataGrid>
-    </div>
-    <AdminShowWrapper>
-        <div class="col-lg-6 col-12">
+<p>
+    <MudDataGrid T="AlchemyPlantModel" Items="@Plants" SortMode="SortMode.Single" Filterable="true"
+        QuickFilter="@_quickPlant">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Plfanzenlexikon</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchPlant" Placeholder="Suchen" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+            </MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+            <PropertyColumn Property="x => x.Occurance" Title="Vorkommen" />
+            <PropertyColumn Property="x => x.Effect" Title="Effekt (Positiv / Negativ)" CellClassFunc="@(x => _effectFunk(x.Positive))" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="AlchemyPlantModel" />
+        </PagerContent>
+    </MudDataGrid>
+</p>
 
-        </div>
-    </AdminShowWrapper>
+<AdminShowWrapper>
+    <p>
+        <MudDataGrid T="AlchemyRecipeModel" Items="@Recipes" SortMode="SortMode.Single" Filterable="true"
+        QuickFilter="@_quickRecipe">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Rezepte</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchPlant" Placeholder="Suchen" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+            </MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="AlchemyPlantModel" />
+        </PagerContent>
+    </MudDataGrid>
+</p>
+</AdminShowWrapper>
 
-</div>
 
 @code {
     [CascadingParameter]
     public bool ShowAdminContent { get; set; }
 
-    private IEnumerable<AlchemyPlantModel> Plants = new List<AlchemyPlantModel>();
+    private IEnumerable<AlchemyPlantModel> Plants = PlantService.AlchemyIngredients;
+    private IEnumerable<AlchemyRecipeModel> Recipes = RecipeService.AlchemyRecipes;
     private string _searchPlant = string.Empty;
 
     private Func<AlchemyPlantModel, bool> _quickPlant => x =>
     {
-        if (string.IsNullOrWhiteSpace(_searchString))
+        if (string.IsNullOrWhiteSpace(_searchPlant))
             return true;
 
-        if (x.Sign.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+        if (x.Name.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
             return true;
 
-        if (x.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+        if (x.Occurance.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
             return true;
 
-        if ($"{x.Number} {x.Position} {x.Molar}".Contains(_searchString))
+        if (x.Effect.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
             return true;
 
         return false;
     };
 
-    private Func<AlchemyPlantModel, string> _cellStyleFunc => x =>
+    private Func<IRarity, string> _rarityFunk => x =>
     {
-        string style = "";
+        return x.Rarity.CssClass();
+    };
 
-        if (x.Number == 1)
-            style += "background-color:#8CED8C";
+    private Func<bool, string> _effectFunk => x =>
+    {
+        return x ? "mud-success text-dark" : "mud-error text-dark";
+    };
 
-        else if (x.Number == 2)
-            style += "background-color:#E5BDE5";
+    private Func<AlchemyRecipeModel, bool> _quickRecipe => x =>
+    {
+        if (string.IsNullOrWhiteSpace(_searchPlant))
+            return true;
 
-        else if (x.Number == 3)
-            style += "background-color:#EACE5D";
+        if (x.FirstIngredient.Name.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-        else if (x.Number == 4)
-            style += "background-color:#F1F165";
+        if (x.SecondIngredient != null && x.SecondIngredient.Name.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-        if (x.Molar > 5)
-            style += ";font-weight:bold";
+        if (x.Effect.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-        return style;
+        return false;
     };
 }

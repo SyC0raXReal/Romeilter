@@ -1,0 +1,122 @@
+@page "/world/alchemy"
+@using Romeilter.Models
+@using Romeilter.StaticServices;
+
+<PageTitle>Alchemie</PageTitle>
+
+<h6>Alchemie</h6>
+
+<p>
+    Seit dem Erwachen der Magie scheinen verschiedene Pflanzen nun mit der Zeit Magische <br />
+    Effekte zu entwickeln. Diese kann nun durch Destillation und andere Vorgänge in <br />
+    Tränke extrahiert werden.
+</p>
+
+<p>
+    Die Alchemie ist ein sehr junges Feld der Wissenschaft und somit sind Alchemisten noch <br />
+    nicht weit verbreitet. Aktuell versammelt sich die offizielle Forschung in
+    <CherstanLink /> <br />
+    Da hier ohne Auflagen einer Regierung geforscht werden kann.
+</p>
+
+<p>
+    Die meisten Alchemisten halten jedoch akuell ihre Ergebnisse zurück mit der Hoffnung viel <br />
+    Profit machen zu können. Wodurch die meisten magischen Plfanzen und deren Effekte noch <br />
+    unbekannt sind.
+</p>
+
+<p>
+    <MudDataGrid T="AlchemyPlantModel" Items="@Plants" SortMode="SortMode.Single" Filterable="true"
+        QuickFilter="@_quickPlant">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Plfanzenlexikon</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchPlant" Placeholder="Suchen" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+            </MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+            <PropertyColumn Property="x => x.Occurance" Title="Vorkommen" />
+            <PropertyColumn Property="x => x.Effect" Title="Effekt (Positiv / Negativ)" CellClassFunc="@(x => _effectFunk(x.Positive))" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="AlchemyPlantModel" />
+        </PagerContent>
+    </MudDataGrid>
+</p>
+
+<AdminShowWrapper>
+    <p>
+        <MudDataGrid T="AlchemyRecipeModel" Items="@Recipes" SortMode="SortMode.Single" Filterable="true"
+        QuickFilter="@_quickRecipe">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Rezepte</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchPlant" Placeholder="Suchen" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+            </MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="AlchemyPlantModel" />
+        </PagerContent>
+    </MudDataGrid>
+</p>
+</AdminShowWrapper>
+
+
+@code {
+    [CascadingParameter]
+    public bool ShowAdminContent { get; set; }
+
+    private IEnumerable<AlchemyPlantModel> Plants = PlantService.AlchemyIngredients;
+    private IEnumerable<AlchemyRecipeModel> Recipes = RecipeService.AlchemyRecipes;
+    private string _searchPlant = string.Empty;
+
+    private Func<AlchemyPlantModel, bool> _quickPlant => x =>
+    {
+        if (string.IsNullOrWhiteSpace(_searchPlant))
+            return true;
+
+        if (x.Name.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Occurance.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Effect.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        return false;
+    };
+
+    private Func<IRarity, string> _rarityFunk => x =>
+    {
+        return x.Rarity.CssClass();
+    };
+
+    private Func<bool, string> _effectFunk => x =>
+    {
+        return x ? "mud-success text-dark" : "mud-error text-dark";
+    };
+
+    private Func<AlchemyRecipeModel, bool> _quickRecipe => x =>
+    {
+        if (string.IsNullOrWhiteSpace(_searchPlant))
+            return true;
+
+        if (x.FirstIngredient.Name.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.SecondIngredient != null && x.SecondIngredient.Name.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Effect.Contains(_searchPlant, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        return false;
+    };
+}

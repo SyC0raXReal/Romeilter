@@ -3,6 +3,7 @@ namespace Romeilter.Models;
 public class AlchemyRecipeModel : IRarity
 {
     public required string Name { get; set; }
+    public required string Description { get; set; }
     public required AlchemyPlantModel FirstIngredient { get; set; }
     public AlchemyPlantModel? SecondIngredient { get; set; }
     public AlchemyPlantModel? ThirdIngredient { get; set; }

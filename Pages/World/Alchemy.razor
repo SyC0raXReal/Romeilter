@@ -26,6 +26,10 @@
 </p>
 
 <p>
+    <RarityIndicator />
+</p>
+
+<p>
     <MudDataGrid T="AlchemyPlantModel" Items="@Plants" SortMode="SortMode.Single" Filterable="true"
         QuickFilter="@_quickPlant">
         <ToolBarContent>
@@ -37,6 +41,7 @@
         </ToolBarContent>
         <Columns>
             <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+            <PropertyColumn Property="x => x.Description" Title="Beschreibung" />
             <PropertyColumn Property="x => x.Occurance" Title="Vorkommen" />
             <PropertyColumn Property="x => x.Effect" Title="Effekt (Positiv / Negativ)" CellClassFunc="@(x => _effectFunk(x.Positive))" />
         </Columns>
@@ -58,7 +63,7 @@
             </MudTextField>
         </ToolBarContent>
         <Columns>
-            <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+            <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))"  />
         </Columns>
         <PagerContent>
             <MudDataGridPager T="AlchemyPlantModel" />

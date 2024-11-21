@@ -1,0 +1,17 @@
+@using Romeilter.Models;
+@using Romeilter.StaticServices;
+
+<MudCard>
+    <MudCardHeader>
+        Seltenheit
+    </MudCardHeader>
+    <MudCardContent>
+        <div class="d-flex flex-column gap-2">
+            <div class="@(Rarity.Common.CssClass())">@Rarity.Common.Name()</div>
+            <div class="@(Rarity.Uncommon.CssClass())">@Rarity.Uncommon.Name()</div>
+            <div class="@(Rarity.Rare.CssClass())">@Rarity.Rare.Name()</div>
+            <div class="@(Rarity.Mythic.CssClass())">@Rarity.Mythic.Name()</div>
+            <div class="@(Rarity.Legendary.CssClass())">@Rarity.Legendary.Name()</div>
+        </div>
+    </MudCardContent>
+</MudCard>

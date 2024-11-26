@@ -1,0 +1,17 @@
+@inject ISnackbar Snackbar
+@using Romeilter.StaticServices;
+
+<MudButton @onclick="@(() => Roll())" Color="Color.Info">Roll D10 + @Modifier</MudButton>
+
+@code {
+    [Parameter]
+    public int Modifier { get; set; } = 0;
+
+    [Parameter]
+    public int Factor { get; set; } = 1;
+    void Roll()
+    {
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+        Snackbar.Add($"Wurf: {DiceService.Roll10(Modifier, Factor)}", Severity.Info);
+    }
+}

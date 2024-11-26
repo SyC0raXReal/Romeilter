@@ -1,0 +1,15 @@
+@using Romeilter.Models;
+@page "/tools/npcs"
+
+
+<PageTitle>Npcs</PageTitle>
+
+<h6>NPCs</h6>
+
+<DiceRoller Modifier="10" />
+
+@code {
+    private IEnumerable<NpcModel> NpcList = new List<NpcModel>();
+
+
+}

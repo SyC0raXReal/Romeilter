@@ -65,6 +65,13 @@
                     </MudNavLink>
                 </MudNavGroup>
             </MudNavGroup>
+            @if (ShowAdminContent)
+            {
+                <MudNavGroup Icon="@Icons.Material.Filled.Build" Title="Tools" Expanded="true">
+                    <MudNavLink Icon="@Icons.Material.Filled.PersonOutline" Href="tools/npcs">NPCs
+                    </MudNavLink>
+                </MudNavGroup>
+            }
         </MudNavMenu>
     </MudDrawer>>
 

@@ -6,6 +6,8 @@ public class NpcModel
     public required string PersonalityTypes { get; set; }
     public int LifePoints { get; set; }
     public NpcGroup Group { get; set; }
+    public string? Remarks { get; set; }
+    public List<WeaponModel>? Weapons { get; set; }
     public required SkillGroupModel Act { get; set; }
     public required SkillGroupModel Knowledge { get; set; }
     public required SkillGroupModel Social { get; set; }

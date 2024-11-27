@@ -1,9 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Romeilter.Models;
 
-public class SkillGroupModel
+[method: SetsRequiredMembers]
+public class SkillGroupModel(string name, params SkillModel[] skills)
 {
-    public required string GroupName { get; set; }
-    public required List<SkillModel> Skills { get; set; }
+    public required string GroupName { get; set; } = name;
+    public required List<SkillModel> Skills { get; set; } = [.. skills];
 
     public int BaseBoni => GetBaseBoni(Skills);
 
@@ -12,6 +15,6 @@ public class SkillGroupModel
     private static int GetBaseBoni(List<SkillModel> skills)
     {
         decimal sum = skills.Sum(q => q.Value);
-        return (int)(Math.Round(sum / 100, MidpointRounding.AwayFromZero) * 10);
+        return (int)Math.Round(sum / 10, MidpointRounding.AwayFromZero);
     }
 }

@@ -1,0 +1,31 @@
+@using Romeilter.Models;
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 5px;">
+    <div class="fw-bold d-flex flex-row gap-2 justify-content-center align-items-center"
+        style="grid-row: 1; grid-column: 1 / 3;">
+        @SkillGroup.GroupName : @SkillGroup.BaseBoni
+        <DiceRoller DiceType="DiceType.D100" SkillCheck="@SkillGroup.BaseBoni" />
+    </div>
+    <div class="fw-bold d-flex flex-row gap-2 justify-content-center align-items-center"
+        style="grid-row: 2; grid-column: 1 / 3;">
+        Geistesblitzpunkte:
+        <div style="width: 50px;">
+            <MudNumericField T="int" Value="@SkillGroup.FlashInspiration" />
+        </div>
+    </div>
+    @foreach (var item in SkillGroup.Skills)
+    {
+        <div class="d-flex align-items-center">
+            @item.Name
+        </div>
+        <div class="d-flex align-items-center">
+            @item.Value + @SkillGroup.BaseBoni = @(item.Value + SkillGroup.BaseBoni)
+            <DiceRoller SkillCheck="item.Value + SkillGroup.BaseBoni" DiceType="DiceType.D100" />
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public required SkillGroupModel SkillGroup { get; set; }
+}

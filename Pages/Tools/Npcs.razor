@@ -1,4 +1,5 @@
 @using Romeilter.Models;
+@using Romeilter.StaticServices
 @page "/tools/npcs"
 
 
@@ -8,8 +9,59 @@
 
 <DiceRoller Modifier="10" />
 
+<p>
+    <MudDataGrid T="NpcModel" Items="@NpcService.AllNpcs" SortMode="SortMode.Single" Filterable="true"
+        QuickFilter="@_quickPlant">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Plfanzenlexikon</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_search" Placeholder="Suchen" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+            </MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <HierarchyColumn />
+            <PropertyColumn Property="x => x.Name" Title="Name" />
+            <PropertyColumn Property="x => NpcService.GroupName(x.Group)" Title="Gruppe" />
+            <PropertyColumn Property="x => x.PersonalityTypes" Title="Persöhnlichkeiten" />
+            <PropertyColumn Property="x => x.LifePoints" Title="Lebenspunkte" />
+            <PropertyColumn Property="x => x.Act.BaseBoni" Title="Handeln" />
+            <PropertyColumn Property="x => x.Knowledge.BaseBoni" Title="Wissen" />
+            <PropertyColumn Property="x => x.Social.BaseBoni" Title="Sozial" />
+            <PropertyColumn Property="x => x.Remarks" Title="Anmerkungen" />
+        </Columns>
+        <ChildRowContent>
+            <div class="d-flex flex-row justify-content-between">
+                <SkillTable SkillGroup="@context.Item.Act" />
+                <SkillTable SkillGroup="@context.Item.Knowledge" />
+                <SkillTable SkillGroup="@context.Item.Social" />
+            </div>
+        </ChildRowContent>
+        <PagerContent>
+            <MudDataGridPager T="AlchemyPlantModel" />
+        </PagerContent>
+    </MudDataGrid>
+</p>
+
 @code {
-    private IEnumerable<NpcModel> NpcList = new List<NpcModel>();
+    private string _search = string.Empty;
+
+    private Func<NpcModel, bool> _quickPlant => x =>
+    {
+        if (string.IsNullOrWhiteSpace(_search))
+            return true;
+
+        if (x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.PersonalityTypes.Contains(_search, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Remarks?.Contains(_search, StringComparison.OrdinalIgnoreCase) == true)
+            return true;
+
+        return false;
+    };
 
 
 }

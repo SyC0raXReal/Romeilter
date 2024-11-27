@@ -1,17 +1,61 @@
 @inject ISnackbar Snackbar
+@using Romeilter.Models
 @using Romeilter.StaticServices;
 
-<MudButton @onclick="@(() => Roll())" Color="Color.Info">Roll D10 + @Modifier</MudButton>
+<MudButton @onclick="@(() => Roll())" Color="Color.Info">
+    @if (SkillCheck != null)
+    {
+        <div>
+            Skillcheck @SkillCheck.Value
+        </div>
+    }
+    else
+    {
+        <div>
+            Roll @Factor @DiceService.GetDiceTypeName(DiceType) + @Modifier
+        </div>
+    }
+</MudButton>
 
 @code {
+    [Parameter]
+    public DiceType DiceType { get; set; } = DiceType.D10;
+
     [Parameter]
     public int Modifier { get; set; } = 0;
 
     [Parameter]
     public int Factor { get; set; } = 1;
+
+    [Parameter]
+    public int? SkillCheck { get; set; } = null;
     void Roll()
     {
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
-        Snackbar.Add($"Wurf: {DiceService.Roll10(Modifier, Factor)}", Severity.Info);
+        if (SkillCheck != null && DiceType == DiceType.D100)
+        {
+            var result = DiceService.SkillCheck(SkillCheck.Value);
+            switch (result.Item2)
+            {
+                case SkillCheckResult.CritFail:
+                    Snackbar.Add($"Wurf: {result.Item1}, Skill: {SkillCheck.Value}, KRITISCHER FAIL!", Severity.Error);
+                    break;
+                case SkillCheckResult.Fail:
+                    Snackbar.Add($"Wurf: {result.Item1}, Skill: {SkillCheck.Value}, FAIL!", Severity.Warning);
+                    break;
+                case SkillCheckResult.CritSucc:
+                    Snackbar.Add($"Wurf: {result.Item1}, Skill: {SkillCheck.Value}, KRITISCHER SUCCESS!", Severity.Info);
+                    break;
+                case SkillCheckResult.Succ:
+                    Snackbar.Add($"Wurf: {result.Item1}, Skill: {SkillCheck.Value}, SUCCESS!", Severity.Success);
+                    break;
+            }
+        }
+        else
+        {
+            Snackbar.Add($"Wurf: {DiceService.Roll(DiceType, Modifier, Factor)}", Severity.Normal);
+        }
+
     }
+
 }

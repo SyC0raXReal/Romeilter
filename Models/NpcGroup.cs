@@ -2,7 +2,8 @@ namespace Romeilter.Models;
 
 public enum NpcGroup
 {
-    Humanoid,
+    Bandit,
+    Guard,
     Animal,
     Monstrosity,
     Demon,

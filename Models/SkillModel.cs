@@ -1,7 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Romeilter.Models;
 
-public class SkillModel
+[method: SetsRequiredMembers]
+public class SkillModel(string name, int value)
 {
-    public required string Name { get; set; }
-    public int Value { get; set; }
+    public required string Name { get; set; } = name;
+    public int Value { get; set; } = value;
 }

@@ -8,6 +8,12 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddMudServices();
+builder.Services.AddMudServices(config =>
+{
+    config.SnackbarConfiguration.VisibleStateDuration = 3000;
+    config.SnackbarConfiguration.SnackbarVariant = MudBlazor.Variant.Outlined;
+    config.SnackbarConfiguration.HideTransitionDuration = 250;
+    config.SnackbarConfiguration.ShowTransitionDuration = 250;
+});
 
 await builder.Build().RunAsync();

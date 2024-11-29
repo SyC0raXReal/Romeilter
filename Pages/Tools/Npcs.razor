@@ -2,18 +2,15 @@
 @using Romeilter.StaticServices
 @page "/tools/npcs"
 
+<AdminPageProtector />
 
 <PageTitle>Npcs</PageTitle>
-
-<h6>NPCs</h6>
-
-<DiceRoller Modifier="10" />
 
 <p>
     <MudDataGrid T="NpcModel" Items="@NpcService.AllNpcs" SortMode="SortMode.Single" Filterable="true"
         QuickFilter="@_quickPlant">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Plfanzenlexikon</MudText>
+            <MudText Typo="Typo.h6">NPCs</MudText>
             <MudSpacer />
             <MudTextField @bind-Value="_search" Placeholder="Suchen" Adornment="Adornment.Start" Immediate="true"
                 AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
@@ -23,6 +20,8 @@
             <HierarchyColumn />
             <PropertyColumn Property="x => x.Name" Title="Name" />
             <PropertyColumn Property="x => NpcService.GroupName(x.Group)" Title="Gruppe" />
+            <PropertyColumn Property="x => NpcService.ChallengeName(x.ChallengeRating)" Title="Herausforderungsgrad"
+                CellClassFunc="x => NpcService.ChallengeCss(x.ChallengeRating)" />
             <PropertyColumn Property="x => x.PersonalityTypes" Title="Persöhnlichkeiten" />
             <PropertyColumn Property="x => x.LifePoints" Title="Lebenspunkte" />
             <PropertyColumn Property="x => x.Act.BaseBoni" Title="Handeln" />
@@ -62,6 +61,5 @@
 
         return false;
     };
-
 
 }

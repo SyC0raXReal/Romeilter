@@ -1,0 +1,17 @@
+@inject NavigationManager NavigationManager
+
+@code {
+    [CascadingParameter]
+    public bool ShowAdminContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("BLa");
+        if (!ShowAdminContent)
+        {
+            Console.WriteLine("TEST");
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+}

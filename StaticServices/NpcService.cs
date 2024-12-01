@@ -71,9 +71,60 @@ public static class NpcService
         ],
         Remarks = "30 Pfeile"
     };
+
+    public static NpcModel HeavyBandit = new()
+    {
+        Name = "Schwerer Bandit",
+        PersonalityTypes = "kriminell, egoistisch, gierig, gewaltbereit",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 100,
+        Act = new("Handeln", new("Zweihandkampf", 65), new("Faustkampf", 45), new("Parieren", 35, 20)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", new("Lügen", 30), new("Einschüchtern", 55)),
+        ArmorValue = 20,
+        Weapons = [
+        new ("Großaxt", 6, DiceType.D10, -10)
+    ],
+        Remarks = "Mittlere Rüstung mit Wert 20"
+    };
+
+    public static NpcModel BanditMage = new()
+    {
+        Name = "Magierbandit",
+        PersonalityTypes = "kriminell, egoistisch, gierig, gewaltbereit",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 100,
+        Act = new("Handeln", [new("Ausweichen", 40), new("Treten", 35)]),
+        Knowledge = new("Wissen", new("Feuerwissen", 25), new("Feuer Formen klein", 50), new("Kampftaktik", 25)),
+        Social = new("Sozial", new("Lügen", 30), new("Feilschen", 45)),
+        Remarks = "Laterne als Feurerstarter"
+    };
+
+    public static NpcModel BanditLeader = new()
+    {
+        Name = "Banditenanführer",
+        PersonalityTypes = "kriminell, egoistisch, gierig, gewaltbereit",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Dangerous,
+        LifePoints = 100,
+        Act = new("Handeln", [new("Ausweichen", 40), new("Schwertkampf", 75), new("Schildparade", 40, 35)]),
+        Knowledge = new("Wissen", new("Kampftaktik", 60), new("Fallen stellen", 50), new("Kampftaktik", 25), new("Feuerwissen", 25), new("Feuer Formen klein", 25)),
+        Social = new("Sozial", new("Lügen", 30), new("Einschüchtern", 60), new("Anführen (Moral boost, HR)", 55), new("Menschenkenntnis (Intention lesen)", 55)),
+        ArmorValue = 35,
+        Weapons = [
+            new ("Schild", 2, DiceType.D10),
+            new ("Schwert", 5, DiceType.D10),
+        ],
+        Remarks = "Leichte Rüstung + 15, Schild + 20"
+    };
     public static List<NpcModel> BanditList = [
         SimpleBandit,
         BanditTrapper,
+        HeavyBandit,
+        BanditMage,
+        BanditLeader,
     ];
 
     public static List<NpcModel> AllNpcs = BanditList;

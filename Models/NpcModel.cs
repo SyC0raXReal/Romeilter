@@ -8,6 +8,7 @@ public class NpcModel
     public NpcGroup Group { get; set; }
     public required ChallengeRating ChallengeRating { get; set; }
     public string? Remarks { get; set; }
+    public int ArmorValue { get; set; } = 0;
     public List<WeaponModel>? Weapons { get; set; }
     public required SkillGroupModel Act { get; set; }
     public required SkillGroupModel Knowledge { get; set; }

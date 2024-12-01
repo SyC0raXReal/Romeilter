@@ -3,7 +3,6 @@ using Romeilter.Models;
 namespace Romeilter.StaticServices;
 public static class NpcService
 {
-
     public static string GroupName(NpcGroup group)
     {
         return group switch
@@ -41,6 +40,8 @@ public static class NpcService
         };
     }
 
+    #region Bandits
+
     public static NpcModel SimpleBandit = new()
     {
         Name = "Einfacher Bandit",
@@ -48,7 +49,7 @@ public static class NpcService
         Group = NpcGroup.Bandit,
         ChallengeRating = ChallengeRating.Easy,
         LifePoints = 100,
-        Act = new("Handeln", new("Schwertkampf", 45), new("Faustkampf", 40), new("Rennen", 35)),
+        Act = new("Handeln", new("Schwertkampf", 45), new("Faustkampf", 40), new("Rennen", 35), new("Parieren", 0)),
         Knowledge = new("Wissen", []),
         Social = new("Sozial", new("Lügen", 35), new("Einschüchtern", 40)),
         Weapons = [
@@ -63,7 +64,7 @@ public static class NpcService
         Group = NpcGroup.Bandit,
         ChallengeRating = ChallengeRating.Easy,
         LifePoints = 100,
-        Act = new("Handeln", new("Bogenschießen", 45), new("Faustkampf", 25), new("Rennen", 20), new("Schleichen", 25), new("Verstecken", 15)),
+        Act = new("Handeln", new("Bogenschießen", 45), new("Faustkampf", 25), new("Rennen", 20), new("Schleichen", 25), new("Verstecken", 15), new("Parieren", 0)),
         Knowledge = new("Wissen", [new("Fallenstellen", 60), new("Jagen", 40), new("Überleben", 30)]),
         Social = new("Sozial", new("Lügen", 30), new("Einschüchtern", 25)),
         Weapons = [
@@ -119,7 +120,7 @@ public static class NpcService
         ],
         Remarks = "Leichte Rüstung + 15, Schild + 20"
     };
-    public static List<NpcModel> BanditList = [
+    public static readonly List<NpcModel> BanditList = [
         SimpleBandit,
         BanditTrapper,
         HeavyBandit,
@@ -127,5 +128,30 @@ public static class NpcService
         BanditLeader,
     ];
 
-    public static List<NpcModel> AllNpcs = BanditList;
+    #endregion Bandits
+
+    #region Animals
+
+    public static NpcModel Wolf = new()
+    {
+        Name = "Wolf",
+        PersonalityTypes = "wild, hungrig-aggressiv",
+        Group = NpcGroup.Animal,
+        ChallengeRating = ChallengeRating.Easy,
+        LifePoints = 60,
+        Act = new("Handeln", new("Beißen", 65), new("Anfallen", 45), new("Rennen", 65), new("Ausweichen", 0)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+            new ("Zähne", 3, DiceType.D10)
+        ]
+    };
+
+    public static readonly List<NpcModel> AnimalList = [
+        Wolf,
+    ];
+
+    #endregion Animals
+
+    public static readonly List<NpcModel> AllNpcs = [.. BanditList, .. AnimalList];
 }

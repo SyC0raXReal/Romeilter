@@ -111,7 +111,7 @@ public static class NpcService
         ChallengeRating = ChallengeRating.Dangerous,
         LifePoints = 100,
         Act = new("Handeln", [new("Ausweichen", 40), new("Schwertkampf", 75), new("Schildparade", 40, 35)]),
-        Knowledge = new("Wissen", new("Kampftaktik", 60), new("Fallen stellen", 50), new("Kampftaktik", 25), new("Feuerwissen", 25), new("Feuer Formen klein", 25)),
+        Knowledge = new("Wissen", new("Kampftaktik", 60), new("Fallen stellen", 50), new("Feuerwissen", 25), new("Feuer Formen klein", 25)),
         Social = new("Sozial", new("Lügen", 30), new("Einschüchtern", 60), new("Anführen (Moral boost, HR)", 55), new("Menschenkenntnis (Intention lesen)", 55)),
         ArmorValue = 35,
         Weapons = [
@@ -130,6 +130,101 @@ public static class NpcService
 
     #endregion Bandits
 
+    #region Guards
+
+    public static NpcModel Guard = new()
+    {
+        Name = "Wache",
+        PersonalityTypes = "rechtschaffend, hilfsbereit, wachsam",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Easy,
+        LifePoints = 100,
+        Act = new("Handeln", new("Schwertkampf", 45), new("Faustkampf", 25), new("Rennen", 10), new("Parieren", 15, 15)),
+        Knowledge = new("Wissen", [new("Rechtswissen", 30), new("Wahrnehmung", 15)]),
+        Social = new("Sozial", new("Lügen erkennen", 35), new("Überreden", 15)),
+        ArmorValue = 15,
+        Weapons = [
+            new ("Schwert", 5, DiceType.D10)
+        ],
+        Remarks = "leichter Waffenrock mit dem Wert 15"
+    };
+
+    public static NpcModel GuardTracker = new()
+    {
+        Name = "Wache - Fährtenleser",
+        PersonalityTypes = "rechtschaffend, hilfsbereit, wachsam",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Easy,
+        LifePoints = 100,
+        Act = new("Handeln", new("Bogenschießen", 45), new("Faustkampf", 25), new("Rennen", 20), new("Schleichen", 25), new("Parieren", 0)),
+        Knowledge = new("Wissen", [new("Fallen erkennen", 60), new("Jagen", 40), new("Überleben", 30), new("Spuren lesen", 45), new("Wahrnehmung", 25)]),
+        Social = new("Sozial", new("Lügen erkennen", 30), new("Überreden", 25)),
+        Weapons = [
+            new ("Langbogen", 5, DiceType.D10)
+        ],
+        Remarks = "30 Pfeile"
+    };
+
+    public static NpcModel HeavyGuard = new()
+    {
+        Name = "Schwere Wache",
+        PersonalityTypes = "rechtschaffend, hilfsbereit, wachsam",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 100,
+        Act = new("Handeln", new("Schwertkampf", 65), new("Faustkampf", 45), new("Parieren", 35, 35)),
+        Knowledge = new("Wissen", [new("Rechtswissen", 30), new("Wahrnehmung", 15)]),
+        Social = new("Sozial", new("Lügen erkennen", 35), new("Überreden", 30)),
+        ArmorValue = 35,
+        Weapons = [
+                    new ("Schwert", 5, DiceType.D10),
+                    new ("Schild", 2, DiceType.D100),
+    ],
+        Remarks = "Mittlere Rüstung mit Wert 20, Schild mit Wert 15"
+    };
+
+    public static NpcModel GuardMage = new()
+    {
+        Name = "Magierwache",
+        PersonalityTypes = "rechtschaffend, hilfsbereit, wachsam",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 100,
+        Act = new("Handeln", [new("Ausweichen", 40), new("Treten", 35)]),
+        Knowledge = new("Wissen", new("Gesteinswissen", 25), new("Gestein Formen klein", 50), new("Wahrnehmung", 15)),
+        Social = new("Sozial", new("Lügen erkennen", 30), new("Diplomatie", 45)),
+        ArmorValue = 15,
+        Remarks = "leichet Waffenrock mit Wert 15"
+    };
+
+    public static NpcModel GuardLeader = new()
+    {
+        Name = "Wachkommandant",
+        PersonalityTypes = "rechtschaffend, hilfsbereit, wachsam",
+        Group = NpcGroup.Bandit,
+        ChallengeRating = ChallengeRating.Dangerous,
+        LifePoints = 100,
+        Act = new("Handeln", [new("Ausweichen", 40), new("Schwertkampf", 75), new("Schildparade", 40, 35)]),
+        Knowledge = new("Wissen", new("Kampftaktik", 60), new("Fallen lesen", 50), new("Kampftaktik", 25), new("Gesteinswissen", 25), new("Gestein Formen klein", 25)),
+        Social = new("Sozial", new("Lügen erkennen", 30), new("Überreden", 60), new("Anführen (Moral boost, HR)", 55), new("Menschenkenntnis (Intention lesen)", 55)),
+        ArmorValue = 35,
+        Weapons = [
+            new ("Schild", 2, DiceType.D10),
+            new ("Schwert", 5, DiceType.D10),
+        ],
+        Remarks = "Leichte Rüstung + 15, Schild + 20"
+    };
+
+    public static readonly List<NpcModel> GuardList = [
+        Guard,
+        GuardTracker,
+        HeavyGuard,
+        GuardMage,
+        GuardLeader,
+    ];
+
+    #endregion Guards
+
     #region Animals
 
     public static NpcModel Wolf = new()
@@ -147,11 +242,44 @@ public static class NpcService
         ]
     };
 
+    public static NpcModel AplhaWolf = new()
+    {
+        Name = "Alpha Wolf",
+        PersonalityTypes = "wild, hungrig-aggressiv",
+        Group = NpcGroup.Animal,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 80,
+        Act = new("Handeln", new("Beißen", 75), new("Anfallen", 55), new("Rennen", 75), new("Ausweichen", 10)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+        new ("Zähne", 3, DiceType.D10)
+    ]
+    };
+
+
+    public static NpcModel Bear = new()
+    {
+        Name = "Bär",
+        PersonalityTypes = "wild, hungrig-aggressiv",
+        Group = NpcGroup.Animal,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 120,
+        Act = new("Handeln", new("Beißen", 55), new("Prankenhieb", 75), new("Rennen", 25), new("Klettern", 55), new("Ausweichen", 0)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+        new ("Zähne", 3, DiceType.D10)
+    ]
+    };
+
     public static readonly List<NpcModel> AnimalList = [
         Wolf,
+        AplhaWolf,
+        Bear,
     ];
 
     #endregion Animals
 
-    public static readonly List<NpcModel> AllNpcs = [.. BanditList, .. AnimalList];
+    public static readonly List<NpcModel> AllNpcs = [.. BanditList, .. AnimalList, .. GuardList];
 }

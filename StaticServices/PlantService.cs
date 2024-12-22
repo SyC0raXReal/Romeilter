@@ -45,7 +45,7 @@ public static class PlantService
 
     public static AlchemyPlantModel Blutwurz = new()
     {
-        Name = "Mate",
+        Name = "Blutwurz",
         Description = "Die Blutrote Wurzel des gelben Enzian, hat einen sehr bitteren geschmack.",
         Effect = "Man fühlt sich geschwächt und wird von einer starken Übelkeit übernommen. Bei Hautkontakt kommt es zu Rötungen und Juckreitz. -5 Malus auf Handeln, Konzentration",
         Occurance = "In den Sümpfen im Norden Cherstans / Südosten von Ahian",
@@ -56,7 +56,7 @@ public static class PlantService
     public static AlchemyPlantModel Tzabra = new()
     {
         Name = "Tzabra",
-        Description = "Auffallend rote längliche Kaktusfurcht.",
+        Description = "Auffallend rote längliche Kaktusfurcht, schmeckt sehr süßlich.",
         Effect = "Löst bei verzehr kurzzeitig starke Glückgefühle aus. Bei übermäßigen verzehr betäubt es die Nerven und verlangsamt den Geist.",
         Occurance = "In Cherstans Trockensteppen",
         Positive = false,

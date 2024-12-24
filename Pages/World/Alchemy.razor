@@ -63,8 +63,32 @@
             </MudTextField>
         </ToolBarContent>
         <Columns>
+            <HierarchyColumn />
             <PropertyColumn Property="x => x.Name" Title="Name (+ Seltenheit)" CellClassFunc="@(x => _rarityFunk(x))" />
+            <PropertyColumn Property="x => x.Description" Title="Beschreibung" />
+            <PropertyColumn Property="x => x.Effect" Title="Effekt" CellClassFunc="@(x => _effectFunk(x.Positive))" />
+            <PropertyColumn Property="x => x.Grenade" Title="Wurftrank" />
+            <PropertyColumn Property="x => _costFunk(x)" Title="Preis" />
         </Columns>
+        <ChildRowContent>
+            <div class="d-flex flex-row gap-2">
+                <div class="@(_rarityFunk(context.Item.FirstIngredient))">
+                    1. Zutat: @context.Item.FirstIngredient.Name
+                </div>
+                @if (context.Item.SecondIngredient != null)
+                {
+                    <div class="@(_rarityFunk(context.Item.SecondIngredient))">
+                        2. Zutat: @context.Item.SecondIngredient.Name
+                    </div>
+                }
+                @if (context.Item.ThirdIngredient != null)
+                {
+                    <div class="@(_rarityFunk(context.Item.ThirdIngredient))">
+                        3. Zutat: @context.Item.ThirdIngredient.Name
+                    </div>
+                }
+            </div>
+        </ChildRowContent>
         <PagerContent>
             <MudDataGridPager T="AlchemyPlantModel" />
         </PagerContent>
@@ -105,6 +129,11 @@
     private Func<bool, string> _effectFunk => x =>
     {
         return x ? "mud-success text-dark" : "mud-error text-dark";
+    };
+
+    private Func<ICurrency, string> _costFunk => x =>
+    {
+        return x.Currency.Display(x.Cost);
     };
 
     private Func<AlchemyRecipeModel, bool> _quickRecipe => x =>

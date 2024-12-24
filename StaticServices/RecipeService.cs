@@ -32,7 +32,7 @@ public static class RecipeService
         new () {
             Name = "Heiltrank",
             Description = "Heilt mittlere Wunden",
-            Effect = "(Fertigkeit) + Lebenspunkte",
+            Effect = "(Fertigkeit) + W10 Lebenspunkte",
             FirstIngredient = PlantService.Athelas,
             SecondIngredient = PlantService.Water,
             Grenade = false,

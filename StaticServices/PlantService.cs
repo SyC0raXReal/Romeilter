@@ -77,7 +77,7 @@ public static class PlantService
     {
         Name = "Athelas",
         Description = "Kleines kraut, was mit kleinen weiß-gelblichen Blüten blüht",
-        Effect = "Heilt schwache wunden, + 5 Lebenspunkte",
+        Effect = "Heilt schwache wunden, + 1W10 Lebenspunkte",
         Occurance = "weltweit, wächst oft an schattigen feuchten plätzen zusammen mit Moos",
         Positive = true,
         Rarity = Rarity.Common,

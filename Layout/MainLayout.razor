@@ -35,9 +35,13 @@
             </div>
             <MudDivider Class="my-2" />
             <MudNavLink Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
-            <MudNavGroup Icon="@Icons.Material.Filled.People" Title="Völker" Expanded="true">
-                <MudNavLink Icon="@Icons.Material.Filled.LocalFireDepartment" Href="people/cherstan">Cherstan
-                </MudNavLink>
+            <MudNavGroup Icon="@Icons.Material.Filled.People" Title="Völker" Expanded="false">
+                <MudNavGroup Expanded="false" Icon="@Icons.Material.Filled.LocalFireDepartment" Title="Cherstan">
+                    <MudNavLink Icon="@Icons.Material.Filled.LocalFireDepartment" Href="people/cherstan">Cherstan
+                    </MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.Fireplace" Href="people/c/shete">Shete
+                    </MudNavLink>
+                </MudNavGroup>
                 <MudNavLink Icon="@Icons.Material.Filled.People" Href="people/federation">Federation von Khergia
                 </MudNavLink>
                 <MudNavLink Icon="@Icons.Material.Filled.Nature" Href="people/iqua">Iqua</MudNavLink>
@@ -45,12 +49,12 @@
                 <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKing" Href="people/ahian">Sultanat Ahian
                 </MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Icon="@Icons.Material.Filled.Brightness1" Title="Welt" Expanded="true">
+            <MudNavGroup Icon="@Icons.Material.Filled.Brightness1" Title="Welt" Expanded="false">
                 <MudNavLink Icon="@Icons.Material.Filled.MenuBook" Href="world/lore">Lore</MudNavLink>
                 <MudNavLink Icon="@Icons.Material.Filled.Star" Href="world/magic">Magie</MudNavLink>
                 <MudNavLink Icon="@Icons.Material.Filled.WineBar" Href="world/pantheon">Götterpantheon</MudNavLink>
                 <MudNavLink Icon="@Icons.Material.Filled.LocalDrink" Href="world/alchemy">Alchemie</MudNavLink>
-                <MudNavGroup Icon="@Icons.Custom.Uncategorized.ColorPalette" Title="Rassen" Expanded="true">
+                <MudNavGroup Icon="@Icons.Custom.Uncategorized.ColorPalette" Title="Rassen" Expanded="false">
                     <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessKing" Href="world/races/human">Menschen
                     </MudNavLink>
                     <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessQueen" Href="world/races/dwarf">Zwerge
@@ -67,7 +71,7 @@
             </MudNavGroup>
             @if (ShowAdminContent)
             {
-                <MudNavGroup Icon="@Icons.Material.Filled.Build" Title="Tools" Expanded="true">
+                <MudNavGroup Icon="@Icons.Material.Filled.Build" Title="Tools" Expanded="false">
                     <MudNavLink Icon="@Icons.Material.Filled.PersonOutline" Href="tools/npcs">NPCs
                     </MudNavLink>
                     <MudNavLink Icon="@Icons.Material.Filled.Bookmark" Href="tools/stories">Geschichten

@@ -68,6 +68,10 @@
                     <MudNavLink Icon="@Icons.Custom.Uncategorized.ChessRook" Href="world/races/giant">Riesen
                     </MudNavLink>
                 </MudNavGroup>
+                @if (ShowAdminContent)
+                {
+                    <MudNavLink Icon="@Icons.Material.Filled.TextFields" Href="world/runes">Zwergenrunen</MudNavLink>
+                }
             </MudNavGroup>
             @if (ShowAdminContent)
             {

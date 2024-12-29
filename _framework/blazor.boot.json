@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Romeilter",
   "resources": {
-    "hash": "sha256-P6i4lhKLV1yHrhKBYvXjOdHp+h2PVVTBJpYKc4JxnxI=",
+    "hash": "sha256-NAe1e+SLZj8TPNucdC4hmOaoEzwK5njGUKyW8zsK1Ro=",
     "jsModuleNative": {
       "dotnet.native.8.0.11.n1sf6xr5tz.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -35,7 +35,7 @@
       "Microsoft.JSInterop.wasm": "sha256-sQ34qlxDFXKQbcyPES9llBTMgxMUB0Z75oiR+Jr1WzA=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-aCgxiIU+arbpOkgLngl1hBQLocrFL2/t1zUJV8HXOzI=",
       "MudBlazor.wasm": "sha256-sYN+wcu9ovu0Wrgc7kzZiDllyu3JheWGbvPztq+rVOk=",
-      "Romeilter.wasm": "sha256-qQi0IGuRK/wn/pvXVBfkQlYgq6yLl/EmZf3WejlZLWI=",
+      "Romeilter.wasm": "sha256-0YjZOSMBAhstmFPjbX5VSzWxYFP+0hw7Gjs1QwBQA6A=",
       "System.Collections.Concurrent.wasm": "sha256-iDe6ljilv2OFPmlDWMFr1s/7EScpd5T6EAOfg2yaWZ0=",
       "System.Collections.Immutable.wasm": "sha256-4KDhC61MTWQnX3ebN3dZeir6PNpyrs8OLMXEQfuTPkk=",
       "System.Collections.wasm": "sha256-wfnMmRHPkezTTMnnSrF4n2glpvL5dYfTDsQJZv2g6gw=",

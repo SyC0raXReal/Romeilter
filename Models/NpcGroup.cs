@@ -7,4 +7,5 @@ public enum NpcGroup
     Animal,
     Monstrosity,
     Demon,
+    Undead,
 }

@@ -12,6 +12,7 @@ public static class NpcService
             NpcGroup.Animal => "Tier",
             NpcGroup.Monstrosity => "Monstrosität",
             NpcGroup.Demon => "Dämon",
+            NpcGroup.Undead => "Untot",
             _ => string.Empty,
         };
     }
@@ -80,12 +81,12 @@ public static class NpcService
         Group = NpcGroup.Bandit,
         ChallengeRating = ChallengeRating.Challenging,
         LifePoints = 100,
-        Act = new("Handeln", new("Zweihandkampf", 65), new("Faustkampf", 45), new("Parieren", 35, 20)),
+        Act = new("Handeln", new("Zweihandkampf", 65, -10), new("Faustkampf", 45), new("Parieren", 35, 20)),
         Knowledge = new("Wissen", []),
         Social = new("Sozial", new("Lügen", 30), new("Einschüchtern", 55)),
         ArmorValue = 20,
         Weapons = [
-        new ("Großaxt", 6, DiceType.D10, -10)
+        new ("Großaxt", 6, DiceType.D10)
     ],
         Remarks = "Mittlere Rüstung mit Wert 20"
     };
@@ -100,7 +101,10 @@ public static class NpcService
         Act = new("Handeln", [new("Ausweichen", 40), new("Treten", 35)]),
         Knowledge = new("Wissen", new("Feuerwissen", 25), new("Feuer Formen klein", 50), new("Kampftaktik", 25)),
         Social = new("Sozial", new("Lügen", 30), new("Feilschen", 45)),
-        Remarks = "Laterne als Feurerstarter"
+        Remarks = "Laterne als Feurerstarter",
+        Weapons = [
+            new("Magie klein", 5, DiceType.D10)
+        ],
     };
 
     public static NpcModel BanditLeader = new()
@@ -194,7 +198,10 @@ public static class NpcService
         Knowledge = new("Wissen", new("Gesteinswissen", 25), new("Gestein Formen klein", 50), new("Wahrnehmung", 15)),
         Social = new("Sozial", new("Lügen erkennen", 30), new("Diplomatie", 45)),
         ArmorValue = 15,
-        Remarks = "leichet Waffenrock mit Wert 15"
+        Remarks = "leichet Waffenrock mit Wert 15",
+        Weapons = [
+            new("Magie klein", 5, DiceType.D10)
+        ],
     };
 
     public static NpcModel GuardLeader = new()
@@ -273,13 +280,145 @@ public static class NpcService
     ]
     };
 
+    public static NpcModel GiantRat = new()
+    {
+        Name = "Riesenratte",
+        PersonalityTypes = "wild, hungrig-aggressiv",
+        Group = NpcGroup.Animal,
+        ChallengeRating = ChallengeRating.Easy,
+        LifePoints = 50,
+        Act = new("Handeln", new("Beißen", 65), new("Rennen", 65), new("Ausweichen", 0)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+            new ("Zähne, giftig + 10", 3, DiceType.D10, 10)
+        ]
+    };
+
+    public static NpcModel GiantLizard = new()
+    {
+        Name = "Riesenechse",
+        PersonalityTypes = "wild, hungrig-aggressiv",
+        Group = NpcGroup.Animal,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 80,
+        Act = new("Handeln", new("Beißen", 75), new("Feuerspucken", 45), new("Rennen", 75), new("Ausweichen", 10)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+        new ("Zähne", 3, DiceType.D10),
+        new ("Feuerspucken", 4, DiceType.D10)
+    ]
+    };
+
     public static readonly List<NpcModel> AnimalList = [
         Wolf,
         AplhaWolf,
         Bear,
+        GiantRat,
+        GiantLizard
     ];
 
     #endregion Animals
 
-    public static readonly List<NpcModel> AllNpcs = [.. BanditList, .. AnimalList, .. GuardList];
+    #region Monstrosity
+    public static NpcModel AcidElemental = new()
+    {
+        Name = "Säureelementar",
+        PersonalityTypes = "wild, hungrig-aggressiv",
+        Group = NpcGroup.Monstrosity,
+        ChallengeRating = ChallengeRating.Dangerous,
+        LifePoints = 150,
+        Act = new("Handeln", new("Säurestreich", 75), new("Säurewurf", 55), new("Säuresprung", 35), new("Schnell fließen (rennen)", 75)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+        new ("Säurekrallen", 5, DiceType.D10),
+        new ("Säurewurf", 4, DiceType.D10),
+        new ("Säuresprung", 3, DiceType.D10, null, "Das Elementar springt und verspritzt in 2m umkreis Säure"),
+        ],
+        Remarks = "Ein großes Wesen komplett aus Säure. Es hat lange scharfe klauen und kein wirklich erkennbares Gesicht."
+    };
+
+    public static readonly List<NpcModel> MonstrosityList = [
+        AcidElemental
+    ];
+
+    #endregion Monstrosity
+
+    #region Undead
+
+    public static NpcModel Skeleton = new()
+    {
+        Name = "Skelett",
+        PersonalityTypes = "feindlich gegenüber lebenden Humanoiden",
+        Group = NpcGroup.Undead,
+        ChallengeRating = ChallengeRating.Easy,
+        LifePoints = 80,
+        Act = new("Handeln", new("Schwertkampf", 45), new("Faustkampf", 40), new("Rennen", 35), new("Parieren", 0)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        Weapons = [
+            new ("Schwert", 5, DiceType.D10)
+        ]
+    };
+
+    public static NpcModel SkeletonArcher = new()
+    {
+        Name = "Skelettbogenschütze",
+        PersonalityTypes = "feindlich gegenüber lebenden Humanoiden",
+        Group = NpcGroup.Undead,
+        ChallengeRating = ChallengeRating.Easy,
+        LifePoints = 80,
+        Act = new("Handeln", new("Bogenschießen", 45), new("Faustkampf", 25), new("Rennen", 20), new("Schleichen", 25), new("Verstecken", 15), new("Parieren", 0)),
+        Knowledge = new("Wissen", [new("Fallenstellen", 60), new("Jagen", 40)]),
+        Social = new("Sozial", []),
+        Weapons = [
+            new ("Langbogen", 5, DiceType.D10)
+        ],
+        Remarks = "30 Pfeile"
+    };
+
+    public static NpcModel SkeletonWarrior = new()
+    {
+        Name = "Skelettkrieger",
+        PersonalityTypes = "feindlich gegenüber lebenden Humanoiden",
+        Group = NpcGroup.Undead,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 100,
+        Act = new("Handeln", new("Zweihandkampf", 65, -10), new("Faustkampf", 45), new("Parieren", 35, 20)),
+        Knowledge = new("Wissen", []),
+        Social = new("Sozial", []),
+        ArmorValue = 20,
+        Weapons = [
+        new ("Großaxt", 6, DiceType.D10)
+    ],
+        Remarks = "Mittlere Rüstung mit Wert 20"
+    };
+
+    public static NpcModel SkeletonMage = new()
+    {
+        Name = "Skelettmagier",
+        PersonalityTypes = "feindlich gegenüber lebenden Humanoiden",
+        Group = NpcGroup.Undead,
+        ChallengeRating = ChallengeRating.Challenging,
+        LifePoints = 100,
+        Act = new("Handeln", [new("Ausweichen", 40), new("Treten", 35)]),
+        Knowledge = new("Wissen", new("Knochenwissen", 25), new("Knochen Formen klein", 50), new("Kampftaktik", 25)),
+        Social = new("Sozial", []),
+        Weapons = [
+            new("Magie klein", 5, DiceType.D10)
+        ],
+    };
+
+    public static readonly List<NpcModel> UndeadList = [
+        Skeleton,
+        SkeletonArcher,
+        SkeletonWarrior,
+        SkeletonMage,
+    ];
+
+    #endregion Undead
+
+    public static readonly List<NpcModel> AllNpcs = [.. BanditList, .. AnimalList, .. GuardList, .. MonstrosityList, .. UndeadList];
 }

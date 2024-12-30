@@ -1,0 +1,22 @@
+@using Romeilter.Models;
+@using Romeilter.StaticServices;
+
+<MudTable T="WeaponModel" Items="Weapons">
+    <HeaderContent>
+        <MudTh colspan="2">
+            Waffen
+        </MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name" title="@context.Remarks">@context.Name</MudTd>
+        <MudTd DataLabel="Sign">
+            @context.DiceCount * @DiceService.GetDiceTypeName(context.DiceType)
+            <DiceRoller Factor="@context.DiceCount" DiceType="@context.DiceType" Modifier="@(context.Modifier ?? 0)" />
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    [Parameter]
+    public required List<WeaponModel> Weapons { get; set; } = new();
+}

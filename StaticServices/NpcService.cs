@@ -114,7 +114,7 @@ public static class NpcService
         Group = NpcGroup.Bandit,
         ChallengeRating = ChallengeRating.Dangerous,
         LifePoints = 100,
-        Act = new("Handeln", [new("Ausweichen", 40), new("Schwertkampf", 75), new("Schildparade", 40, 35)]),
+        Act = new("Handeln", [new("Ausweichen", 40), new("Schwertkampf", 75), new("Schildparade", 40, 35), new("Werfen", 35)]),
         Knowledge = new("Wissen", new("Kampftaktik", 60), new("Fallen stellen", 50), new("Feuerwissen", 25), new("Feuer Formen klein", 25)),
         Social = new("Sozial", new("Lügen", 30), new("Einschüchtern", 60), new("Anführen (Moral boost, HR)", 55), new("Menschenkenntnis (Intention lesen)", 55)),
         ArmorValue = 35,

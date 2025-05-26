@@ -1,0 +1,24 @@
+﻿<MudPaper Class="pa-4">
+    <MudStack Spacing="2">
+        <h6>@Title</h6>
+        <MudButton OnClick="OnExpandCollapseClick">@(_expanded ? "Einklappen" : "Aufklappen")</MudButton>
+        <MudDivider />
+        <MudCollapse Expanded="_expanded">
+            This content is collapsible.
+        </MudCollapse>
+    </MudStack>
+</MudPaper>
+
+@code {
+    bool _expanded = true;
+    [Parameter]
+    public required RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public required string Title { get; set; }
+
+    private void OnExpandCollapseClick()
+    {
+        _expanded = !_expanded;
+    }
+}
